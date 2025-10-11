@@ -27,7 +27,12 @@ void heapsort(int a[],int n){
 	for(i=n/2-1 ; i>=0 ; i--){
 		heapify(a,n,i);	
 	}
-	for()
+	for(i = n - 1 ; i > n ; i--){
+		int temp = a[0];
+		a[0] = a[i];
+		a[i] = temp;
+		heapify(a,i,0);
+	}
 	
 }
 void display(){
