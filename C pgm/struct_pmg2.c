@@ -12,13 +12,28 @@ typedef struct emp emp;
 void insert(emp emplist[], int n,int i){
 	printf("Enter the ENO, Ename, Salary, Dno: ");
 	scanf("%d %s %d %d",&emplist[i].eno,emplist[i].ename,&emplist[i].salary,&emplist[i].dno);
-	
 }
-void delete(){
-	
+void delete(emp emplist[], int d,int n){
+	int i;
+	while(i < n-1){
+		if(emplist[i].eno == d){
+			printf("Deleted:%d",emplist[i].ename);
+			emplist[i] = emplist[i+1];
+		}
+	}
 }
-void sort(){
-	
+void sortName(emp emplist[],int n){
+	int i,j;
+	emp temp[15];
+	for(i=0;i<n;i++){
+		for(j=i+1 ; j<n ;j++ ){
+			if(emplist[i].ename > emplist[i+1].ename ){
+				temp[i] = emplist[i];
+				emplist[i] = emplist[j];
+				emplist[j] = temp[i];						
+			}
+		}
+	}
 }
 void search(){
 	
@@ -33,7 +48,7 @@ void display(emp emplist[], int n) {
 
 int main(){
 	emp emplist[100];
-	int n,i,ch=0,d;	
+	int n,i=0,ch=0,d;	
 	printf("Enter number of employees:");
 	scanf("%d",&n);
 	while(ch != 5){
@@ -42,21 +57,20 @@ int main(){
 		scanf("%d",&ch);
 		switch(ch){
 			case 1:
-				i=0;
 				insert(emplist,n,i);
 				i++;
 				break;
 			case 2:
 				printf("Enter eno of employee to be deleted:");
 				scanf("%d",&d);
-				delete(d);
+				delete(emplist,d,n);
 			case 3:
-				sort();
+				sortName(emplist,i);
 				break;
 			case 4:
 				search();
 			case 5:
-				display(emplist,n);
+				display(emplist,i);
 				break;
 		}
 	}
