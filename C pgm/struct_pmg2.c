@@ -22,15 +22,31 @@ void delete(emp emplist[], int d,int n){
 		}
 	}
 }
+int compareName(char name1[],char name2[]){
+	int i=0;
+	while(name1[i] != '\0' && name2[i] != '\0'){
+		if(name1[i] < name2[i])
+			return -1;
+		else if(name1[i] > name2[i])
+			return 1;
+		i++;	
+	}
+	if(name1[i] == '\0' && name2[i] == '\0')
+		return 0;
+	else if(name1[i] != '\0')
+		return -1;
+	else
+		return 1;
+}
 void sortName(emp emplist[],int n){
 	int i,j;
-	emp temp[15];
+	emp temp;
 	for(i=0;i<n;i++){
 		for(j=i+1 ; j<n ;j++ ){
-			if(emplist[i].ename > emplist[i+1].ename ){
-				temp[i] = emplist[i];
+			if(compareName(emplist[i].ename,emplist[j].ename) > 0){
+				temp = emplist[i];
 				emplist[i] = emplist[j];
-				emplist[j] = temp[i];						
+				emplist[j] = temp;						
 			}
 		}
 	}
@@ -51,7 +67,7 @@ int main(){
 	int n,i=0,ch=0,d;	
 	printf("Enter number of employees:");
 	scanf("%d",&n);
-	while(ch != 5){
+	while(ch != 6){
 		printf("1.insert\n2.delete\n3.sort\n4.search\n5.Display\n");
 		printf("Enter a choice:");
 		scanf("%d",&ch);
