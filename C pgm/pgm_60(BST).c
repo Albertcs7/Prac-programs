@@ -21,7 +21,7 @@ struct node* insert(struct node* root, int value) {
     return root;
 }
 
-// Inorder traversal (Left, Root, Right)
+// Inorder traversal
 void inorder(struct node* root) {
     if(root!=NULL) {
         inorder(root->left);
@@ -30,7 +30,7 @@ void inorder(struct node* root) {
     }
 }
 
-// Preorder traversal (Root, Left, Right)
+// Preorder traversal
 void preorder(struct node* root) {
     if(root!=NULL) {
         printf("%d ",root->data);
@@ -39,7 +39,7 @@ void preorder(struct node* root) {
     }
 }
 
-// Postorder traversal (Left, Right, Root)
+// Postorder traversal
 void postorder(struct node* root) {
     if(root!=NULL) {
         postorder(root->left);
@@ -48,23 +48,44 @@ void postorder(struct node* root) {
     }
 }
 
+// Menu function
+int menu() {
+    int choice;
+    printf("1. Insert\n2. Display Inorder\n3. Display Preorder\n4. Display Postorder\n5. Exit\nEnter your choice: ");
+    scanf("%d",&choice);
+    return choice;
+}
+
+// Main function with menu-driven loop
 int main() {
     struct node* root=NULL;
-    int n,i,value;
-    printf("Enter number of nodes: ");
-    scanf("%d",&n);
-    printf("Enter %d values:\n",n);
-    for(i=0;i<n;i++) {
-        scanf("%d",&value);
-        root=insert(root,value);
+    int choice,value;
+    for(choice=menu();choice!=5;choice=menu()) {
+        switch(choice) {
+            case 1:
+                printf("Enter element to insert: ");
+                scanf("%d",&value);
+                root=insert(root,value); // Insert element
+                break;
+            case 2:
+                printf("Inorder: ");
+                inorder(root); // Display inorder
+                printf("\n");
+                break;
+            case 3:
+                printf("Preorder: ");
+                preorder(root); // Display preorder
+                printf("\n");
+                break;
+            case 4:
+                printf("Postorder: ");
+                postorder(root); // Display postorder
+                printf("\n");
+                break;
+            default:
+                printf("Wrong choice\n");
+        }
     }
-    printf("\nInorder Traversal: ");
-    inorder(root);
-    printf("\nPreorder Traversal: ");
-    preorder(root);
-    printf("\nPostorder Traversal: ");
-    postorder(root);
-    printf("\n");
     return 0;
 }
 

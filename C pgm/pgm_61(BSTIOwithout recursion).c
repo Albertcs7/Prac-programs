@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node {
+typedef struct node {
     int data;
     struct node *left, *right;
-};
+} node;
 
-// Insert a node into BST
-struct node* insert(struct node* root, int value) {
+node* root=NULL;
+
+// Insert a node into BST recursively
+node* insert(node* root,int value) {
     if(root==NULL) {
-        struct node* newNode=(struct node*)malloc(sizeof(struct node));
+        node* newNode=(node*)malloc(sizeof(node));
         newNode->data=value;
         newNode->left=newNode->right=NULL;
         return newNode;
@@ -22,10 +24,10 @@ struct node* insert(struct node* root, int value) {
 }
 
 // Inorder traversal without recursion
-void inorder(struct node* root) {
-    struct node* stack[50];
+void inorder(node* root) {
+    node* stack[50];
     int top=-1;
-    struct node* curr=root;
+    node* curr=root;
     while(curr!=NULL || top!=-1) {
         while(curr!=NULL) {
             stack[++top]=curr;
@@ -37,19 +39,38 @@ void inorder(struct node* root) {
     }
 }
 
-int main() {
-    struct node* root=NULL;
-    int n,i,value;
-    printf("Enter number of nodes: ");
-    scanf("%d",&n);
-    printf("Enter %d values:\n",n);
-    for(i=0;i<n;i++) {
-        scanf("%d",&value);
-        root=insert(root,value);
-    }
-    printf("\nInorder Traversal (without recursion): ");
+// Display function
+void display() {
+    printf("BST Elements in Inorder: ");
     inorder(root);
     printf("\n");
+}
+
+// Menu function
+int menu() {
+    int choice;
+    printf("1. Insert\n2. Display Inorder\n3. Exit\nEnter your choice: ");
+    scanf("%d",&choice);
+    return choice;
+}
+
+// Main function with menu-driven loop
+int main() {
+    int choice,value;
+    for(choice=menu();choice!=3;choice=menu()) {
+        switch(choice) {
+            case 1:
+                printf("Enter element to insert: ");
+                scanf("%d",&value);
+                root=insert(root,value); // Insert element
+                break;
+            case 2:
+                display(); // Display BST in inorder
+                break;
+            default:
+                printf("Wrong choice\n");
+        }
+    }
     return 0;
 }
 
