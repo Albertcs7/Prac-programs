@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// Compare two strings (like strcmp)
+// Compare two strings 
 int compare(char s1[], char s2[]) {
     int i=0;
     while(s1[i]!='\0' && s2[i]!='\0') {
@@ -11,7 +11,7 @@ int compare(char s1[], char s2[]) {
     return s1[i]-s2[i];
 }
 
-// Copy one string to another (like strcpy)
+// Copy one string to another 
 void copy(char d[], char s[]) {
     int i=0;
     while(s[i]!='\0') {

@@ -16,10 +16,8 @@ void enqueue(int val) {
     newnode->next = NULL;
 
     if (rear == NULL) {
-        // Queue is empty
         front = rear = newnode;
     } else {
-        // Add at the end
         rear->next = newnode;
         rear = newnode;
     }
@@ -56,7 +54,7 @@ void display() {
         printf("Queue is empty!\n");
         return;
     }
-    printf("Queue elements (Front to Rear): ");
+    printf("Queue elements : ");
     while (t != NULL) {
         printf("%d ", t->data);
         t = t->next;

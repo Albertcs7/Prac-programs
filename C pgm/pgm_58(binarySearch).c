@@ -28,7 +28,7 @@ int binarySearch(int arr[], int n, int key) {
     }
     return -1;
 }
-
+//Main function
 int main() {
     int n,i,key,result;
     printf("Enter the number of elements: ");
@@ -37,14 +37,14 @@ int main() {
     printf("Enter the elements :\n");
     for(i=0;i<n;i++)
         scanf("%d",&arr[i]);
-    sortArray(arr,n);
+    sortArray(arr,n);		//calling sorting function
     printf("Sorted array: ");
     for(i=0;i<n;i++)
         printf("%d ",arr[i]);
     printf("\n");
     printf("Enter the element to search: ");
     scanf("%d",&key);
-    result=binarySearch(arr,n,key);
+    result=binarySearch(arr,n,key);		//calling search function
     if(result==-1)
         printf("Element %d not found in the array.\n",key);
     else
