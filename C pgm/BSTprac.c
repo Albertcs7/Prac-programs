@@ -38,6 +38,44 @@ void inorder(node* root) {
         inorder(root->right);
     }
 }
+node* findMin(node* root) {
+    while (root->left != NULL)
+        root = root->left;
+    return root;
+}
+node* delete(node *root, int val){
+	if(root == NULL){
+		return root;
+	}	
+	else if(val < root->data){
+		root = delete(root->left, val);
+	}
+	else if(val > root->data){
+		root = delete(root->right, val);
+	}
+	else{
+		if(root->left == NULL && root->right == NULL){
+			free(root);
+			return NULL;
+		}
+		else if(root->left == NULL){
+			node *temp = root->right;
+			free(root);
+			return temp;
+		}
+		else if(root->right == NULL){
+			node *temp = root->left;
+			free(root);
+			return temp;
+		}
+		else{
+			node* temp = findMin(root->right);  // find smallest in right subtree
+            root->data = temp->data;            // copy value
+            root->right = delete(root->right, temp->data); 
+		}
+	}
+	return root;	
+}
 
 // Main function with menu
 int main() {
@@ -45,7 +83,7 @@ int main() {
     int ch, val;
 
     while (1) {
-        printf("\n1. Insert\n2. Display (Inorder)\n3. Exit\nEnter choice: ");
+        printf("\n1. Insert\n2. Display (Inorder)\n3. delete\nEnter choice: ");
         scanf("%d", &ch);
 
         switch (ch) {
@@ -62,9 +100,10 @@ int main() {
                 break;
 
             case 3:
-                printf("Exiting...\n");
-                exit(0);
-
+                printf("Enter number to delete:");
+                scanf("%d",&val);
+				root = delete(root,val);
+				break;
             default:
                 printf("Invalid choice! Try again.\n");
         }
