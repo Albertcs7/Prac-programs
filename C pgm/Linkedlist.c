@@ -67,6 +67,29 @@ int delFirstElem(){
 	free(temp);
 }
 
+void delSpecElem(int pos){
+	int i=0;
+	if(head == NULL){
+		printf("No Elements...");
+		return;
+	}
+	node *t;
+	if(pos == 1) {
+        t = head;
+        head = head->next;
+        free(t);
+        return;
+    }
+    
+	node *temp = head;
+	for(i = 1; i < pos-1 ; i++){
+		temp = temp->next;
+	}
+	t = temp->next;
+	temp->next = temp->next->next;
+	free(t);  
+}
+
 int delLastElem(){
 	if(head == NULL){
 		printf("NO ELEMENTS...");
@@ -131,11 +154,11 @@ int main(){
 			case 5:
 				delLastElem();
 				break;
-//			case 6:
-//				printf("Enter psoition to delete:");
-//				scanf("%d",&pos);
-//				delSpecElem(pos);
-//				break;
+			case 6:
+				printf("Enter psoition to delete:");
+				scanf("%d",&pos);
+				delSpecElem(pos);
+				break;
 			case 7:
 				display();
 				break;
