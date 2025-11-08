@@ -1,5 +1,5 @@
 DECLARE
-  v_course_id Courses.Course_ID%TYPE :='CSE101';
+  v_course_id  varchar2(10):='CSE101';
   v_count     NUMBER ;
 BEGIN
   SELECT COUNT(*) 
