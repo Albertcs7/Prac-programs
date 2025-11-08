@@ -140,7 +140,7 @@ int main(){
 				display();
 				break;
 			case 8:
-				ch = 9	;
+				ch = 9;
 				break;
 		}
 	}	
